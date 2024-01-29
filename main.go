@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	static "github.com/soulteary/gin-static"
 )
 
 // album represents data about a record album.
@@ -23,6 +25,19 @@ var albums = []album{
 
 func main() {
 	router := gin.Default()
+	router.Use(static.Serve("/", static.LocalFile("./wwwroot", false)))
+
+	router.Use(func(ctx *gin.Context) {
+		fmt.Println("第一个中间件")
+	})
+
+	router.Use(func(ctx *gin.Context) {
+		fmt.Println("第二个中间件")
+	})
+
+	router.GET("/", func(ctx *gin.Context) {
+		ctx.String(200, "Hello Gin")
+	})
 
 	router.GET("/albums", func(ctx *gin.Context) {
 		ctx.IndentedJSON(http.StatusOK, albums)
