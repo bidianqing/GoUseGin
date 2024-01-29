@@ -1,4 +1,4 @@
-module github.com/bidianqing/gousegin
+module github.com/bidianqing/go-use-gin
 
 go 1.21.6
 
