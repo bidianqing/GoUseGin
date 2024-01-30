@@ -24,7 +24,7 @@ func main() {
 		ctx.String(200, "Hello Gin")
 	})
 
-	router.Route(app)
+	router.MapControllerRoute(app)
 
 	app.Run(":8080")
 }
