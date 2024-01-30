@@ -2,9 +2,8 @@ package main
 
 import (
 	"fmt"
-	"reflect"
 
-	"github.com/bidianqing/go-use-gin/controllers"
+	"github.com/bidianqing/go-use-gin/router"
 	"github.com/gin-gonic/gin"
 	static "github.com/soulteary/gin-static"
 )
@@ -25,13 +24,7 @@ func main() {
 		ctx.String(200, "Hello Gin")
 	})
 
-	var userController = controllers.UserController{}
-	var userControllerType = reflect.TypeOf(userController)
-	for i := 0; i < userControllerType.NumMethod(); i++ {
-		method := userControllerType.Method(i)
-		fmt.Println(method.Name)
-	}
-	app.GET("/users", userController.GetUserList)
+	router.Route(app)
 
 	app.Run(":8080")
 }

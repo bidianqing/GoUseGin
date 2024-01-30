@@ -6,8 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type UserController struct {
-}
+type UserController struct{}
 
 // 获取用户列表
 func (userController UserController) GetUserList(ctx *gin.Context) {
