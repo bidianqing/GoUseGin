@@ -1,9 +1,8 @@
 package main
 
 import (
-	"fmt"
-
-	"github.com/bidianqing/go-use-gin/cmd/myappname/router"
+	router "github.com/bidianqing/go-use-gin/api"
+	"github.com/bidianqing/go-use-gin/api/middleware"
 	"github.com/gin-gonic/gin"
 	static "github.com/soulteary/gin-static"
 )
@@ -12,17 +11,8 @@ func main() {
 	app := gin.Default()
 	app.Use(static.Serve("/", static.LocalFile("./cmd/myappname/wwwroot", false)))
 
-	app.Use(func(ctx *gin.Context) {
-		fmt.Println("第一个自定义中间件")
-	})
-
-	app.Use(func(ctx *gin.Context) {
-		fmt.Println("第二个自定义中间件")
-	})
-
-	app.GET("/", func(ctx *gin.Context) {
-		ctx.String(200, "Hello Gin")
-	})
+	app.Use(middleware.M1)
+	app.Use(middleware.M2)
 
 	router.Map(app)
 
