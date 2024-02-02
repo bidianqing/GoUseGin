@@ -3,6 +3,7 @@ package handler
 import (
 	"time"
 
+	config "github.com/bidianqing/go-use-gin/configs"
 	"github.com/gin-gonic/gin"
 )
 
@@ -15,6 +16,7 @@ func (userController UserController) GetUserList(ctx *gin.Context) {
 	data["time"] = time.Now()
 	data["tags"] = []int{1, 2, 3, 4}
 	data["age"] = nil
+	data["appName"] = config.GetString("AppName")
 
 	ctx.JSON(200, data)
 }
