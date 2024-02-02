@@ -17,6 +17,7 @@ func (userController UserController) GetUserList(ctx *gin.Context) {
 	data["tags"] = []int{1, 2, 3, 4}
 	data["age"] = nil
 	data["appName"] = config.GetString("AppName")
+	data["remote"] = config.GetString("Remote")
 
 	ctx.JSON(200, data)
 }

@@ -6,27 +6,43 @@ import (
 	"github.com/fsnotify/fsnotify"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
+	_ "github.com/spf13/viper/remote"
 )
 
-var c *viper.Viper
+var v *viper.Viper
 
 // 加载配置文件
 func Load(app *gin.Engine, env string) {
-	c = viper.New()
-	c.AddConfigPath("./configs")
-	c.SetConfigType("json")
-
-	// 读取对应环境的配置文件
-	c.SetConfigName("appsettings." + env)
-	if err := c.MergeInConfig(); err != nil {
-		panic(fmt.Errorf("fatal error config file: %w", err))
-	}
-	c.OnConfigChange(func(e fsnotify.Event) {
-		fmt.Println("Config file changed:", e.Name)
-	})
-	c.WatchConfig()
+	v = viper.New()
+	addJson(env)
+	addConsul(env)
 }
 
 func GetString(key string) (value string) {
-	return c.GetString(key)
+	return v.GetString(key)
+}
+
+func addJson(env string) {
+	v.AddConfigPath("./configs")
+	v.SetConfigType("json")
+
+	// 读取对应环境的配置文件
+	v.SetConfigName("appsettings." + env)
+	if err := v.MergeInConfig(); err != nil {
+		panic(fmt.Errorf("fatal error config file: %w", err))
+	}
+	v.OnConfigChange(func(e fsnotify.Event) {
+		fmt.Println("Config file changed:", e.Name)
+	})
+	v.WatchConfig()
+}
+
+func addConsul(env string) {
+	consul_url := v.GetString("Consul_Url")
+	v.AddRemoteProvider("consul", consul_url, "test.Development.json")
+	v.SetConfigType("json")
+	if err := v.ReadRemoteConfig(); err != nil {
+		panic(fmt.Errorf("fatal error config file: %w", err))
+	}
+	v.WatchRemoteConfigOnChannel()
 }
