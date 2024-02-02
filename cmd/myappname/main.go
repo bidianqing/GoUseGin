@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/bidianqing/go-use-gin/router"
+	"github.com/bidianqing/go-use-gin/cmd/myappname/router"
 	"github.com/gin-gonic/gin"
 	static "github.com/soulteary/gin-static"
 )
