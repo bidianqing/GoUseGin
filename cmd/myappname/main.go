@@ -10,7 +10,7 @@ import (
 
 func main() {
 	app := gin.Default()
-	app.Use(static.Serve("/", static.LocalFile("./wwwroot", false)))
+	app.Use(static.Serve("/", static.LocalFile("./cmd/myappname/wwwroot", false)))
 
 	app.Use(func(ctx *gin.Context) {
 		fmt.Println("第一个自定义中间件")
