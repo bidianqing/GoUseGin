@@ -6,7 +6,7 @@ import (
 )
 
 // 注册路由
-func MapControllerRoute(app *gin.Engine) {
+func Map(app *gin.Engine) {
 	var userController = controllers.UserController{}
 	app.GET("/users", userController.GetUserList)
 }
