@@ -39,7 +39,7 @@ func addJson(env string) {
 
 func addConsul(env string) {
 	consul_url := v.GetString("Consul_Url")
-	v.AddRemoteProvider("consul", consul_url, "test.Development.json")
+	v.AddRemoteProvider("consul", consul_url, "appsettings."+env+".json")
 	v.SetConfigType("json")
 	if err := v.ReadRemoteConfig(); err != nil {
 		panic(fmt.Errorf("fatal error config file: %w", err))
