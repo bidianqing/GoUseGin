@@ -28,7 +28,7 @@ func addJson(env string) {
 
 	// 读取对应环境的配置文件
 	v.SetConfigName("appsettings." + env)
-	if err := v.MergeInConfig(); err != nil {
+	if err := v.ReadInConfig(); err != nil {
 		panic(fmt.Errorf("fatal error config file: %w", err))
 	}
 	v.OnConfigChange(func(e fsnotify.Event) {
