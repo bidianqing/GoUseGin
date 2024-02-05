@@ -4,6 +4,8 @@ import (
 	"time"
 
 	config "github.com/bidianqing/go-use-gin/configs"
+	"github.com/bidianqing/go-use-gin/internal/myappname/domain/useraggregate"
+	"github.com/bidianqing/go-use-gin/internal/myappname/infrastructure"
 	"github.com/gin-gonic/gin"
 )
 
@@ -19,7 +21,10 @@ func (userController UserController) GetUserList(ctx *gin.Context) {
 	data["appName"] = config.GetString("AppName")
 	data["remote"] = config.GetString("Remote")
 
-	ctx.JSON(200, data)
+	var userRpo useraggregate.UserRepo = infrastructure.UserRepo{}
+	users := userRpo.GetUserList()
+
+	ctx.JSON(200, users)
 }
 
 func (userController UserController) AddUser(ctx *gin.Context) {
