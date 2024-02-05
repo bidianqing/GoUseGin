@@ -21,3 +21,7 @@ func (userController UserController) GetUserList(ctx *gin.Context) {
 
 	ctx.JSON(200, data)
 }
+
+func (userController UserController) AddUser(ctx *gin.Context) {
+
+}
