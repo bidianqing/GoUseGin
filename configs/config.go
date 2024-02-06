@@ -15,7 +15,7 @@ var v *viper.Viper
 func Load(app *gin.Engine, env string) {
 	v = viper.New()
 	addJson(env)
-	addConsul(env)
+	//addConsul(env)
 }
 
 func GetString(key string) (value string) {

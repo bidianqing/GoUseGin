@@ -21,7 +21,8 @@ func (userController UserController) GetUserList(ctx *gin.Context) {
 	data["appName"] = config.GetString("AppName")
 	data["remote"] = config.GetString("Remote")
 
-	var userRpo useraggregate.UserRepo = infrastructure.UserRepo{}
+	repos := infrastructure.NewRepositories()
+	var userRpo useraggregate.UserRepo = repos.UserRepo
 	users := userRpo.GetUserList()
 
 	ctx.JSON(200, users)
