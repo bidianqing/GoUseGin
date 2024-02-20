@@ -26,5 +26,5 @@ func main() {
 
 	router.Map(app)
 
-	app.Run(":8080")
+	app.Run()
 }
