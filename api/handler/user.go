@@ -15,7 +15,7 @@ type UserController struct{}
 func (userController UserController) GetUserList(ctx *gin.Context) {
 	// 获取queryString参数
 	name := ctx.Query("name")
-	fmt.Println(name)
+	fmt.Println("querystring参数name=" + name)
 
 	repos := infrastructure.NewRepositories()
 	var userRpo useraggregate.UserRepo = repos.UserRepo
