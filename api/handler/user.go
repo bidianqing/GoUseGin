@@ -33,3 +33,9 @@ func (userController UserController) AddUser(ctx *gin.Context) {
 
 	ctx.JSON(200, user)
 }
+
+func (userController UserController) Error(ctx *gin.Context) {
+	count := 0
+
+	fmt.Println(3 / count)
+}

@@ -21,8 +21,8 @@ func main() {
 	config.Load(app, environmentName)
 
 	app.Use(static.Serve("/", static.LocalFile("./cmd/myappname/wwwroot", false)))
+	app.Use(middleware.ExceptionHandler)
 	app.Use(middleware.M1)
-	app.Use(middleware.M2)
 
 	router.Map(app)
 
