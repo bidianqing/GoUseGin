@@ -13,5 +13,5 @@ func Map(app *gin.Engine) {
 
 	var userController = handler.UserController{}
 	app.GET("/users", userController.GetUserList)
-	app.POST("users", userController.AddUser)
+	app.POST("/users", userController.AddUser)
 }
