@@ -13,3 +13,12 @@ type User struct {
 	Name       string    `json:"name" binding:"required"`
 	CreateTime time.Time `json:"createTime"`
 }
+
+// 模型验证失败消息
+func (user User) GetModelInvalidMessages() map[string]string {
+	return map[string]string{
+		"Id.gt":         "Id必须大于0",
+		"Id.max":        "Id不能超过100",
+		"Name.required": "Name不能为空",
+	}
+}

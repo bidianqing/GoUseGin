@@ -7,6 +7,7 @@ import (
 	"github.com/bidianqing/go-use-gin/internal/myappname/domain/useraggregate"
 	"github.com/bidianqing/go-use-gin/internal/myappname/infrastructure"
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 )
 
 type UserController struct{}
@@ -27,7 +28,10 @@ func (userController UserController) GetUserList(ctx *gin.Context) {
 func (userController UserController) AddUser(ctx *gin.Context) {
 	var user useraggregate.User
 	if err := ctx.ShouldBindJSON(&user); err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		errors := err.(validator.ValidationErrors)
+
+		errorMessage := user.GetModelInvalidMessages()[errors[0].Field()+"."+errors[0].Tag()]
+		ctx.JSON(http.StatusBadRequest, gin.H{"success": false, "message": errorMessage, "data": nil})
 		return
 	}
 
