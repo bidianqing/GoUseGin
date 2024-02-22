@@ -21,7 +21,7 @@ func (userController UserController) GetUserList(ctx *gin.Context) {
 	var userRpo useraggregate.UserRepo = repos.UserRepo
 	users := userRpo.GetUserList()
 
-	ctx.PureJSON(200, users)
+	ctx.JSON(200, users)
 }
 
 func (userController UserController) AddUser(ctx *gin.Context) {
@@ -31,5 +31,5 @@ func (userController UserController) AddUser(ctx *gin.Context) {
 		return
 	}
 
-	ctx.PureJSON(200, user)
+	ctx.JSON(200, user)
 }
