@@ -39,7 +39,22 @@ func (userController UserController) AddUser(ctx *gin.Context) {
 }
 
 func (userController UserController) Error(ctx *gin.Context) {
-	count := 0
+	/*
+		go func() {
+			// 如果协程里的代码panic了，在没有defer recover的情况下，程序会终止退出
+			// 想捕获/处理 协程内panic 所造成的恐慌，recover 必须与 defer 配套使用，否则无效
+			// panic 只能触发当前 协程 的 defer 调用，在 defer 调用中如果存在 recover ，那么就能够处理其所抛出的恐慌事件。但是需要注意的是在其它 Goroutine 中的 defer 是对其没有用的，并不支持跨协程（goroutine），需要分清楚。
+			defer func() {
+				if err := recover(); err != nil {
+					fmt.Println(err)
+				}
+			}()
 
+			count := 0
+			fmt.Println(3 / count)
+		}()
+		//*/
+
+	count := 0
 	fmt.Println(3 / count)
 }
