@@ -22,6 +22,7 @@ func main() {
 
 	app.Use(static.Serve("/", static.LocalFile("./cmd/myappname/wwwroot", false)))
 	app.Use(middleware.ExceptionHandler)
+	app.Use(middleware.AuthenticationHandler)
 	app.Use(middleware.M1)
 
 	router.Map(app)
