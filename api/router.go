@@ -2,6 +2,7 @@ package router
 
 import (
 	"github.com/bidianqing/go-use-gin/api/handler"
+	"github.com/bidianqing/go-use-gin/api/middleware"
 	"github.com/gin-gonic/gin"
 )
 
@@ -11,8 +12,15 @@ func Map(app *gin.Engine) {
 		ctx.String(200, "Hello Gin")
 	})
 
+	// https://github.com/gin-gonic/gin/issues/3047
+	apiGroup := app.Group("/api")
+	apiGroup.Use(middleware.AuthenticationHandler)
+
 	var userController = handler.UserController{}
-	app.GET("/users", userController.GetUserList)
-	app.POST("/users", userController.AddUser)
-	app.GET("/error", userController.Error)
+	apiGroup.GET("/users", userController.GetUserList)
+	apiGroup.POST("/users", userController.AddUser)
+	apiGroup.GET("/error", userController.Error)
+
+	var accountController = handler.AccountController{}
+	app.POST("/login", accountController.Login)
 }
