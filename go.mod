@@ -8,8 +8,6 @@ require (
 	github.com/spf13/viper v1.18.2
 )
 
-require github.com/bwmarrin/snowflake v0.3.0
-
 require (
 	cloud.google.com/go v0.110.10 // indirect
 	cloud.google.com/go/compute v1.23.3 // indirect
@@ -17,6 +15,7 @@ require (
 	cloud.google.com/go/firestore v1.14.0 // indirect
 	cloud.google.com/go/longrunning v0.5.4 // indirect
 	github.com/armon/go-metrics v0.4.1 // indirect
+	github.com/bwmarrin/snowflake v0.3.0
 	github.com/bytedance/sonic v1.10.2 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20230717121745-296ad89f973d // indirect
 	github.com/chenzhuoyu/iasm v0.9.1 // indirect
