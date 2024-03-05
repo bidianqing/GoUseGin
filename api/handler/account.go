@@ -19,7 +19,7 @@ func (accountController AccountController) Login(ctx *gin.Context) {
 		"iss":  "bidianqing",
 		"aud":  "golang",
 		"sub":  "auth",
-		"exp":  jwt.NewNumericDate(time.Now().Add(1 * time.Minute)),
+		"exp":  jwt.NewNumericDate(time.Now().Add(1 * time.Hour)),
 		"nbf":  jwt.NewNumericDate(time.Now()),
 		"iat":  jwt.NewNumericDate(time.Now()),
 		"jti":  uuid.New(),

@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/bidianqing/go-use-gin/internal/myappname/domain/useraggregate"
+	"github.com/bwmarrin/snowflake"
 )
 
 // UserRepo 用户仓储实现
@@ -13,5 +14,14 @@ type UserRepo struct {
 
 func (userRepo UserRepo) GetUserList() *[]useraggregate.User {
 	fmt.Println("GetUserList")
-	return &[]useraggregate.User{{Id: 1, Name: "tom", CreateTime: time.Now()}}
+
+	node, err := snowflake.NewNode(1)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	// Generate a snowflake ID.
+	id := node.Generate()
+
+	return &[]useraggregate.User{{Id: id.Int64(), Name: "tom", CreateTime: time.Now()}}
 }

@@ -8,6 +8,8 @@ require (
 	github.com/spf13/viper v1.18.2
 )
 
+require github.com/bwmarrin/snowflake v0.3.0
+
 require (
 	cloud.google.com/go v0.110.10 // indirect
 	cloud.google.com/go/compute v1.23.3 // indirect

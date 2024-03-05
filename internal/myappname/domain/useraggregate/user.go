@@ -9,7 +9,7 @@ import (
 // User 用户
 type User struct {
 	seedwork.Entity
-	Id         int64     `json:"id" binding:"gt=0,max=100"`
+	Id         int64     `json:"id,string" binding:"gt=0,max=100"`
 	Name       string    `json:"name" binding:"required"`
 	CreateTime time.Time `json:"createTime"`
 }
