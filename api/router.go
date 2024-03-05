@@ -23,4 +23,7 @@ func Map(app *gin.Engine) {
 
 	var accountController = handler.AccountController{}
 	loginGroup.POST("", accountController.Login)
+
+	var testController = handler.TestController{}
+	apiGroup.GET("/config", testController.Config)
 }
