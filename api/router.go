@@ -13,8 +13,8 @@ func Map(app *gin.Engine) {
 	})
 
 	// https://github.com/gin-gonic/gin/issues/3047
-	apiGroup := app.Group("/api")
-	apiGroup.Use(middleware.AuthenticationHandler)
+	apiGroup := app.Group("/").Use(middleware.AuthenticationHandler)
+	loginGroup := app.Group("/login")
 
 	var userController = handler.UserController{}
 	apiGroup.GET("/users", userController.GetUserList)
@@ -22,5 +22,5 @@ func Map(app *gin.Engine) {
 	apiGroup.GET("/error", userController.Error)
 
 	var accountController = handler.AccountController{}
-	app.POST("/login", accountController.Login)
+	loginGroup.POST("", accountController.Login)
 }

@@ -26,7 +26,7 @@ func AuthenticationHandler(ctx *gin.Context) {
 	})
 	if err != nil {
 		fmt.Println(err)
-		ctx.JSON(401, gin.H{"success": false, "message": err, "data": nil})
+		ctx.JSON(401, gin.H{"success": false, "message": err.Error(), "data": nil})
 		ctx.Abort()
 		return
 	}
