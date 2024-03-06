@@ -6,8 +6,8 @@ import (
 	router "github.com/bidianqing/go-use-gin/api"
 	"github.com/bidianqing/go-use-gin/api/middleware"
 	config "github.com/bidianqing/go-use-gin/configs"
+	static "github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
-	static "github.com/soulteary/gin-static"
 )
 
 func main() {
@@ -20,7 +20,7 @@ func main() {
 	app := gin.Default()
 	config.Load(app, environmentName)
 
-	app.Use(static.Serve("/", static.LocalFile("./cmd/myappname/wwwroot", false)))
+	app.Use(static.Serve("/", static.LocalFile("./cmd/myappname1/wwwroot", false)))
 	app.Use(middleware.ExceptionHandler)
 	app.Use(middleware.M1)
 
