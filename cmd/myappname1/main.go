@@ -6,7 +6,7 @@ import (
 	router "github.com/bidianqing/go-use-gin/api"
 	"github.com/bidianqing/go-use-gin/api/middleware"
 	config "github.com/bidianqing/go-use-gin/configs"
-	static "github.com/gin-gonic/contrib/static"
+	static "github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 )
 
