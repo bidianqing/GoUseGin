@@ -26,4 +26,5 @@ func Map(app *gin.Engine) {
 
 	var testController = handler.TestController{}
 	apiGroup.GET("/config", testController.Config)
+	apiGroup.GET("/redis", testController.Redis)
 }

@@ -3,7 +3,9 @@ module github.com/bidianqing/go-use-gin
 go 1.22.0
 
 require (
+	github.com/bwmarrin/snowflake v0.3.0
 	github.com/gin-gonic/gin v1.9.1
+	github.com/redis/rueidis v1.0.31
 	github.com/spf13/viper v1.18.2
 )
 
@@ -14,7 +16,6 @@ require (
 	cloud.google.com/go/firestore v1.14.0 // indirect
 	cloud.google.com/go/longrunning v0.5.4 // indirect
 	github.com/armon/go-metrics v0.4.1 // indirect
-	github.com/bwmarrin/snowflake v0.3.0
 	github.com/bytedance/sonic v1.10.2 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20230717121745-296ad89f973d // indirect
 	github.com/chenzhuoyu/iasm v0.9.1 // indirect
