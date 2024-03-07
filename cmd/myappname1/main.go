@@ -18,11 +18,11 @@ func main() {
 
 	flag.Parse()
 
-	redis.NewRedisClient("redis://127.0.0.1:6379?client_cache=0")
-	defer redis.CloseRedisClient()
-
 	app := gin.Default()
 	config.Load(app, environmentName)
+
+	redis.NewRedisClient(config.GetString("ConnectionStrings.Redis"))
+	defer redis.CloseRedisClient()
 
 	app.Use(static.Serve("/", static.LocalFile("./cmd/myappname1/wwwroot", false)))
 	app.Use(middleware.ExceptionHandler)
