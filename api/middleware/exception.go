@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// 异常处理中间件
+// 异常处理中间件 TODO 记录更相信的日志信息
 func ExceptionHandler(ctx *gin.Context) {
 	defer func() {
 		err := recover()

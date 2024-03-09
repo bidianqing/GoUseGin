@@ -17,16 +17,23 @@ func main() {
 	flag.StringVar(&environmentName, "env", "Development", "环境变量")
 
 	flag.Parse()
+	isProduction := environmentName == "Production"
+	if isProduction {
+		gin.SetMode(gin.ReleaseMode)
+	}
 
-	app := gin.Default()
+	app := gin.New()
+
 	config.Load(app, environmentName)
 
 	redis.NewRedisClient(config.GetString("ConnectionStrings.Redis"))
 	defer redis.CloseRedisClient()
 
 	app.Use(static.Serve("/", static.LocalFile("./cmd/myappname1/wwwroot", false)))
+	if !isProduction {
+		app.Use(gin.Logger())
+	}
 	app.Use(middleware.ExceptionHandler)
-	app.Use(middleware.M1)
 
 	router.Map(app)
 
