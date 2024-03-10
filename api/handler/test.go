@@ -4,7 +4,7 @@ import (
 	"time"
 
 	config "github.com/bidianqing/go-use-gin/configs"
-	"github.com/bidianqing/go-use-gin/internal/pkg/log"
+	logger "github.com/bidianqing/go-use-gin/internal/pkg/log"
 	"github.com/bidianqing/go-use-gin/internal/pkg/redis"
 	"github.com/gin-gonic/gin"
 )
@@ -28,7 +28,7 @@ func (testController TestController) Redis(ctx *gin.Context) {
 
 // Log
 func (testController TestController) Log(ctx *gin.Context) {
-	log.Logger.Debug("Info日志信息")
+	logger.Info("Info日志信息")
 
 	ctx.JSON(200, gin.H{"success": true, "message": "ok", "data": nil})
 }

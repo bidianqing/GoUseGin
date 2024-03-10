@@ -1,15 +1,48 @@
-package log
+package logger
 
 import (
-	logger "github.com/sirupsen/logrus"
+	"github.com/sirupsen/logrus"
+	_ "go.uber.org/zap"
 )
 
-var Logger *logger.Logger = logger.New()
+var logger *logrus.Logger
 
 func init() {
-	if Logger == nil {
-		Logger = logger.New()
+	if logger == nil {
+		logger = logrus.New()
 	}
 
-	Logger.SetLevel(logger.InfoLevel)
+	logger.SetLevel(logrus.InfoLevel)
+}
+
+func Debug(args ...interface{}) {
+	logger.Debug(args...)
+}
+
+func Debugf(format string, args ...interface{}) {
+	logger.Debugf(format, args...)
+}
+
+func Info(args ...interface{}) {
+	logger.Info(args...)
+}
+
+func Infof(format string, args ...interface{}) {
+	logger.Infof(format, args...)
+}
+
+func Warn(args ...interface{}) {
+	logger.Warn(args...)
+}
+
+func Warnf(format string, args ...interface{}) {
+	logger.Warnf(format, args...)
+}
+
+func Error(args ...interface{}) {
+	logger.Error(args...)
+}
+
+func Errorf(format string, args ...interface{}) {
+	logger.Errorf(format, args...)
 }

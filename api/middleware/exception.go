@@ -3,7 +3,7 @@ package middleware
 import (
 	"runtime/debug"
 
-	"github.com/bidianqing/go-use-gin/internal/pkg/log"
+	logger "github.com/bidianqing/go-use-gin/internal/pkg/log"
 	"github.com/gin-gonic/gin"
 )
 
@@ -12,7 +12,7 @@ func ExceptionHandler(ctx *gin.Context) {
 	defer func() {
 		err := recover()
 		if err != nil {
-			log.Logger.Errorf("%s  %s", err, string(debug.Stack()))
+			logger.Errorf("%s  %s", err, string(debug.Stack()))
 			ctx.JSON(500, gin.H{"success": false, "message": "程序开小差了", "data": nil})
 			ctx.Abort()
 		}
