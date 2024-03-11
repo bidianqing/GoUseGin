@@ -11,9 +11,9 @@
             "mode": "debug",
             "cwd": "${workspaceFolder}",
             "program": "${workspaceFolder}\\cmd\\myappname1\\main.go",
-            "args": [
-                "--env", "Development",
-            ],
+            "env": {
+                "GIN_ENVIRONMENT":"Development"
+            },
         },
         {
             "name": "myappname2",
