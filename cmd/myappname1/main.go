@@ -29,7 +29,7 @@ func main() {
 	redis.NewRedisClient(config.GetString("ConnectionStrings.Redis"))
 	defer redis.CloseRedisClient()
 
-	app.Use(static.Serve("/", static.LocalFile("./cmd/myappname1/wwwroot", false)))
+	app.Use(static.Serve("/", static.LocalFile("./wwwroot", false)))
 	if !isProduction {
 		app.Use(gin.Logger())
 	}
