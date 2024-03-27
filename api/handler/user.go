@@ -19,8 +19,8 @@ func (userController UserController) GetUserList(ctx *gin.Context) {
 	fmt.Println("querystring参数name=" + name)
 
 	repos := infrastructure.NewRepositories()
-	var userRpo useraggregate.UserRepo = repos.UserRepo
-	users := userRpo.GetUserList()
+	var userRepo useraggregate.UserRepo = repos.UserRepo
+	users := userRepo.GetUserList()
 
 	ctx.JSON(200, users)
 }
