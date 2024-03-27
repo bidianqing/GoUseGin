@@ -4,10 +4,12 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strconv"
 
 	router "github.com/bidianqing/go-use-gin/api"
 	"github.com/bidianqing/go-use-gin/api/middleware"
 	config "github.com/bidianqing/go-use-gin/configs"
+	"github.com/bidianqing/go-use-gin/internal/pkg/idgen"
 	"github.com/bidianqing/go-use-gin/internal/pkg/redis"
 	static "github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
@@ -36,6 +38,14 @@ func main() {
 
 	redis.NewRedisClient(config.GetString("ConnectionStrings.Redis"))
 	defer redis.CloseRedisClient()
+
+	key := "appname"
+	generatorId := redis.Incr(key)
+	if generatorId >= 5 {
+		generatorId = 0
+		redis.Set(key, strconv.Itoa(int(generatorId)), -1)
+	}
+	idgen.NewIdGenerator(generatorId)
 
 	app.Use(static.Serve("/", static.LocalFile("./wwwroot", false)))
 	if !isProduction {

@@ -23,9 +23,10 @@ func CloseRedisClient() {
 }
 
 func Set(key string, value string, duration time.Duration) {
-	err = client.Do(ctx, client.B().Set().Key(key).Value(value).Ex(duration).Build()).Error()
-	if err != nil {
-		panic(err)
+	if duration > 0 {
+		client.Do(ctx, client.B().Set().Key(key).Value(value).Ex(duration).Build())
+	} else {
+		client.Do(ctx, client.B().Set().Key(key).Value(value).Build())
 	}
 }
 
@@ -49,4 +50,14 @@ func Hset(key string, fieldValues map[string]string) {
 
 func Expire(key string, duration time.Duration) {
 	client.Do(ctx, client.B().Expire().Key(key).Seconds(int64(duration.Seconds())).Build())
+}
+
+func Incr(key string) int64 {
+	id, _ := client.Do(ctx, client.B().Incr().Key(key).Build()).ToInt64()
+
+	return id
+}
+
+func Del(key string) {
+	client.Do(ctx, client.B().Del().Key(key).Build())
 }
