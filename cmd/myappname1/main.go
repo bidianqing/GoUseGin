@@ -41,7 +41,7 @@ func main() {
 
 	key := "appname"
 	generatorId := redis.Incr(key)
-	if generatorId >= 5 {
+	if generatorId >= 1024 {
 		generatorId = 0
 		redis.Set(key, strconv.Itoa(int(generatorId)), -1)
 	}
