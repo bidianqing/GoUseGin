@@ -15,6 +15,10 @@ func init() {
 	logger.SetLevel(logrus.InfoLevel)
 }
 
+func IsLevelEnabled(level logrus.Level) bool {
+	return logger.IsLevelEnabled(level)
+}
+
 func Debug(args ...interface{}) {
 	logger.Debug(args...)
 }
