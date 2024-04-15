@@ -28,4 +28,5 @@ func Map(app *gin.Engine) {
 	apiGroup.GET("/config", testController.Config)
 	apiGroup.GET("/redis", testController.Redis)
 	apiGroup.GET("/log", testController.Log)
+	apiGroup.GET("/queue", testController.Queue)
 }

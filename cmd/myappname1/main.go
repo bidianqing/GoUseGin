@@ -10,6 +10,7 @@ import (
 	"github.com/bidianqing/go-use-gin/api/middleware"
 	config "github.com/bidianqing/go-use-gin/configs"
 	"github.com/bidianqing/go-use-gin/internal/pkg/idgen"
+	"github.com/bidianqing/go-use-gin/internal/pkg/queue"
 	"github.com/bidianqing/go-use-gin/internal/pkg/redis"
 	static "github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
@@ -54,6 +55,13 @@ func main() {
 	app.Use(middleware.ExceptionHandler)
 
 	router.Map(app)
+
+	queue.NewQueue(10)
+	go func() {
+		for {
+			queue.Dequeue()()
+		}
+	}()
 
 	fmt.Println("Hosting Environment: ", environmentName)
 	app.Run()
