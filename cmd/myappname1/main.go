@@ -12,6 +12,7 @@ import (
 	"github.com/bidianqing/go-use-gin/internal/pkg/idgen"
 	"github.com/bidianqing/go-use-gin/internal/pkg/queue"
 	"github.com/bidianqing/go-use-gin/internal/pkg/redis"
+	"github.com/gin-contrib/cors"
 	static "github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 	jsoniter "github.com/json-iterator/go"
@@ -48,6 +49,7 @@ func main() {
 	}
 	idgen.NewIdGenerator(generatorId)
 
+	app.Use(cors.Default())
 	app.Use(static.Serve("/", static.LocalFile("./wwwroot", false)))
 	if !isProduction {
 		app.Use(gin.Logger())
