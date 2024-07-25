@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/gin-gonic/gin"
@@ -27,10 +28,18 @@ func addJson(env string) {
 	v.SetConfigType("json")
 
 	// 读取对应环境的配置文件
-	v.SetConfigName("appsettings." + env)
+	v.SetConfigName("appsettings")
 	if err := v.ReadInConfig(); err != nil {
 		panic(fmt.Errorf("fatal error config file: %w", err))
 	}
+
+	if _, err := os.Stat("./configs/appsettings." + env + ".json"); err == nil {
+		v.SetConfigName("appsettings." + env)
+		if err := v.MergeInConfig(); err != nil {
+			panic(fmt.Errorf("fatal error config file: %w", err))
+		}
+	}
+
 	v.OnConfigChange(func(e fsnotify.Event) {
 		fmt.Println("Config file changed:", e.Name)
 	})
