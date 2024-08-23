@@ -14,7 +14,8 @@ type TestController struct{}
 
 // 获取配置
 func (testController TestController) Config(ctx *gin.Context) {
-	val := config.GetString("ConnectionStrings.Mysql")
+	key := ctx.Query("key")
+	val := config.GetString(key)
 
 	ctx.JSON(200, gin.H{"success": true, "message": "ok", "data": val})
 }
