@@ -10,18 +10,10 @@
             "request": "launch",
             "mode": "debug",
             "cwd": "${workspaceFolder}",
-            "program": "${workspaceFolder}\\cmd\\myappname1\\main.go",
+            "program": "${workspaceFolder}\\cmd\\main.go",
             "env": {
                 "GIN_ENVIRONMENT":"Development"
             },
-        },
-        {
-            "name": "myappname2",
-            "type": "go",
-            "request": "launch",
-            "mode": "debug",
-            "cwd": "${workspaceFolder}",
-            "program": "${workspaceFolder}\\cmd\\myappname2\\main.go",
         }
     ]
 }
