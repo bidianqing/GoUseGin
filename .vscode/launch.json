@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "myappname1",
+            "name": "gousegin",
             "type": "go",
             "request": "launch",
             "mode": "debug",
